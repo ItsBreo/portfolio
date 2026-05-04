@@ -100,7 +100,7 @@ export const certifications = [
   },
   {
     id: 2,
-    title: 'CFGS Desarrollo de Aplicaciones Web',
+    title: 'CFGS Administración de Sistemas Informáticos y Redes',
     issuer: 'CIFP Villa de Agüimes',
     date: '2023 - 2025',
     icon: 'graduation',
