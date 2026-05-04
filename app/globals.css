@@ -20,9 +20,9 @@ body {
   --text:       #0a0a14;
   --text2:      #5a5870;
   --text3:      #9896b0;
-  --accent:     #6c5ce7;
-  --accent2:    #a29bfe;
-  --blue:       #4a90d9;
+  --accent:     #4b3bba; /* Darker, richer purple for contrast */
+  --accent2:    #7b6fe3; /* Mid purple */
+  --blue:       #2a6bb5; /* Deeper blue */
   --glow:       rgba(108, 92, 231, 0.10);
 
   /* Glassmorphism */
@@ -183,4 +183,60 @@ body {
 .section-padding {
   padding-left: max(1.5rem, calc((100vw - 1100px) / 2));
   padding-right: max(1.5rem, calc((100vw - 1100px) / 2));
+}
+
+/* ─────────────────────────────────────────────────────────────────
+ * Accesibilidad (a11y) & UX
+ * ───────────────────────────────────────────────────────────────── */
+
+/* 1. Estados de foco para navegación con teclado */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+  transition: outline-offset 0.2s ease;
+}
+
+/* 2. Saltar al contenido principal (Screen readers / Keyboard) */
+.skip-to-content {
+  position: fixed; /* Mejor que absolute para que esté arriba del todo */
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -150%); /* Oculto arriba de la pantalla */
+  background-color: var(--accent);
+  color: #ffffff;
+  padding: 1rem 1.5rem;
+  z-index: 999999;
+  border-radius: 0 0 12px 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.3s ease;
+  pointer-events: none; /* No clickeable mientras está oculto */
+}
+
+.skip-to-content:focus-visible {
+  transform: translate(-50%, 0); /* Baja a la vista */
+  pointer-events: auto;
+  outline: 3px solid #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+/* 3. Reducir Movimiento (Preferencia del SO) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

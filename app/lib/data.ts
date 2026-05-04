@@ -38,6 +38,7 @@ export const projects = [
     github: 'https://github.com/ItsBreo/tienda-magic',
     demo: '',
     featured: true,
+    image: '/projects/blacklotus.png',
   },
   {
     id: 2,
@@ -48,6 +49,7 @@ export const projects = [
     github: 'https://github.com/AzaelReyesMartel-1ASIR/PjSystemVg',
     demo: '',
     featured: true,
+    image: '/projects/eldenring.png',
   },
 ]
 

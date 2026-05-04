@@ -12,6 +12,7 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('#hero')
 
   useEffect(() => {
     setMounted(true)
@@ -21,6 +22,27 @@ export default function Navbar() {
     const handleScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  /* Track active section via IntersectionObserver */
+  useEffect(() => {
+    const ids = ['hero', 'about', 'stack', 'experience', 'projects', 'contact']
+    const observers: IntersectionObserver[] = []
+
+    ids.forEach((id) => {
+      const el = document.getElementById(id)
+      if (!el) return
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(`#${id}`)
+        },
+        { rootMargin: '-40% 0px -55% 0px' }
+      )
+      obs.observe(el)
+      observers.push(obs)
+    })
+
+    return () => observers.forEach((o) => o.disconnect())
   }, [])
 
   // Prevent body scroll when mobile menu is open
@@ -89,24 +111,48 @@ export default function Navbar() {
             }}
             className="nav-desktop"
           >
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                style={{
-                  fontSize: '0.85rem',
-                  fontWeight: 400,
-                  color: 'var(--text2)',
-                  textDecoration: 'none',
-                  transition: 'color 0.3s',
-                  letterSpacing: '0.01em',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text2)')}
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  style={{
+                    fontSize: '0.85rem',
+                    fontWeight: isActive ? 500 : 400,
+                    color: isActive ? 'var(--accent)' : 'var(--text2)',
+                    textDecoration: 'none',
+                    transition: 'color 0.3s',
+                    letterSpacing: '0.01em',
+                    position: 'relative',
+                    paddingBottom: '4px',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (!isActive) e.currentTarget.style.color = 'var(--accent)'
+                  }}
+                  onMouseLeave={(e) => {
+                    if (!isActive) e.currentTarget.style.color = 'var(--text2)'
+                  }}
+                >
+                  {link.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-indicator"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      style={{
+                        position: 'absolute',
+                        bottom: 0,
+                        left: '25%',
+                        right: '25%',
+                        height: '2px',
+                        borderRadius: '2px',
+                        background: 'var(--accent)',
+                      }}
+                    />
+                  )}
+                </a>
+              )
+            })}
           </div>
 
           {/* Actions */}

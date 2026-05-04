@@ -1,9 +1,11 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Mail, FileDown } from 'lucide-react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Mail, FileDown, Check } from 'lucide-react'
 import { personalInfo } from '@/lib/data'
 import { EASE_OUT_EXPO } from '@/lib/animations'
+import Magnetic from './Magnetic'
 
 /* Inline SVG brand icons */
 function GithubIcon({ size = 18 }: { size?: number }) {
@@ -47,6 +49,15 @@ const socialItems = [
 ]
 
 export default function Contact() {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = (e: React.MouseEvent, value: string) => {
+    e.preventDefault()
+    navigator.clipboard.writeText(value)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
   return (
     <section
       id="contact"
@@ -128,16 +139,19 @@ export default function Contact() {
         >
           {socialItems.map((socialItem, index) => {
             const Icon = socialItem.icon
+            const isEmail = socialItem.label === 'Email'
+
             return (
-              <motion.a
-                key={socialItem.label}
-                href={socialItem.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
+              <Magnetic key={socialItem.label}>
+                <motion.a
+                  href={socialItem.href}
+                  target={isEmail ? undefined : "_blank"}
+                  rel={isEmail ? undefined : "noopener noreferrer"}
+                  onClick={isEmail ? (e) => handleCopy(e, socialItem.value) : undefined}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
                   duration: 0.6,
                   delay: 0.25 + index * 0.08,
                   ease: EASE_OUT_EXPO,
@@ -174,7 +188,7 @@ export default function Contact() {
                     flexShrink: 0,
                   }}
                 >
-                  {socialItem.isSvg ? <Icon size={18} /> : <Icon size={18} />}
+                  {isEmail && copied ? <Check size={18} /> : socialItem.isSvg ? <Icon size={18} /> : <Icon size={18} />}
                 </div>
                 <div style={{ textAlign: 'left' }}>
                   <span
@@ -193,13 +207,15 @@ export default function Contact() {
                     style={{
                       fontSize: '0.9rem',
                       fontWeight: 400,
-                      color: 'var(--text)',
+                      color: isEmail && copied ? '#10b981' : 'var(--text)',
+                      transition: 'color 0.3s'
                     }}
                   >
-                    {socialItem.value}
+                    {isEmail && copied ? '¡Copiado al portapapeles!' : socialItem.value}
                   </span>
                 </div>
               </motion.a>
+            </Magnetic>
             )
           })}
         </div>
@@ -210,37 +226,38 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
+          style={{ display: 'inline-block' }}
         >
-          <a
-            href={personalInfo.cvUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.8rem 2rem',
-              borderRadius: '12px',
-              background: 'var(--accent)',
-              color: '#fff',
-              fontWeight: 500,
-              fontSize: '0.88rem',
-              textDecoration: 'none',
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-              boxShadow: '0 4px 20px var(--glow)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)'
-              e.currentTarget.style.boxShadow = '0 8px 30px var(--glow)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)'
-              e.currentTarget.style.boxShadow = '0 4px 20px var(--glow)'
-            }}
-          >
-            <FileDown size={16} />
-            Descargar CV
-          </a>
+          <Magnetic>
+            <a
+              href={personalInfo.cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.8rem 2rem',
+                borderRadius: '12px',
+                background: 'var(--accent)',
+                color: '#fff',
+                fontWeight: 500,
+                fontSize: '0.88rem',
+                textDecoration: 'none',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                boxShadow: '0 4px 20px var(--glow)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = '0 8px 30px var(--glow)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = '0 4px 20px var(--glow)'
+              }}
+            >
+              <FileDown size={16} />
+              Descargar CV
+            </a>
+          </Magnetic>
         </motion.div>
       </motion.div>
     </section>

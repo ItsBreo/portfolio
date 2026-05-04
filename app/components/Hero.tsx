@@ -4,6 +4,8 @@ import { motion } from 'framer-motion'
 import { ArrowDown, Mail } from 'lucide-react'
 import { personalInfo } from '@/lib/data'
 import { EASE_OUT_EXPO } from '@/lib/animations'
+import Magnetic from './Magnetic'
+import TextReveal from './TextReveal'
 
 /* Inline SVG brand icons (lucide-react removed brand icons) */
 function GithubIcon({ size = 18 }: { size?: number }) {
@@ -69,15 +71,15 @@ export default function Hero() {
         <motion.h1
           variants={item}
           style={{
-            fontSize: 'clamp(2.4rem, 6vw, 4rem)',
-            fontWeight: 700,
-            letterSpacing: '-0.03em',
+            fontSize: 'clamp(2.8rem, 7vw, 4.5rem)',
+            fontWeight: 800,
+            letterSpacing: '-0.04em',
             lineHeight: 1.05,
             color: 'var(--text)',
           }}
         >
           {personalInfo.name.split(' ')[0]}{' '}
-          <span className="gradient-text">
+          <span className="gradient-text" style={{ paddingRight: '0.1em' }}>
             {personalInfo.name.split(' ').slice(1).join(' ')}
           </span>
         </motion.h1>
@@ -97,18 +99,19 @@ export default function Hero() {
         </motion.p>
 
         {/* Bio */}
-        <motion.p
-          variants={item}
+        <TextReveal
+          text={personalInfo.bio}
+          delay={0.4}
           style={{
             fontSize: 'clamp(0.95rem, 2vw, 1.05rem)',
             fontWeight: 300,
             color: 'var(--text2)',
             lineHeight: 1.7,
             maxWidth: '560px',
+            justifyContent: 'center',
+            textAlign: 'center',
           }}
-        >
-          {personalInfo.bio}
-        </motion.p>
+        />
 
         {/* CTAs */}
         <motion.div
@@ -121,62 +124,62 @@ export default function Hero() {
             justifyContent: 'center',
           }}
         >
-          <a
-            href={personalInfo.cvUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.7rem 1.6rem',
-              borderRadius: '12px',
-              background: 'var(--accent)',
-              color: '#fff',
-              fontWeight: 500,
-              fontSize: '0.88rem',
-              textDecoration: 'none',
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-              boxShadow: '0 4px 20px var(--glow)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)'
-              e.currentTarget.style.boxShadow = '0 8px 30px var(--glow)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)'
-              e.currentTarget.style.boxShadow = '0 4px 20px var(--glow)'
-            }}
-          >
-            Descargar CV
-          </a>
-          <a
-            href="#contact"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              padding: '0.7rem 1.6rem',
-              borderRadius: '12px',
-              background: 'var(--surface2)',
-              border: '1px solid var(--border)',
-              color: 'var(--text)',
-              fontWeight: 500,
-              fontSize: '0.88rem',
-              textDecoration: 'none',
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)'
-              e.currentTarget.style.borderColor = 'var(--accent)'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)'
-              e.currentTarget.style.borderColor = 'var(--border)'
-            }}
-          >
-            Contacto
-          </a>
+          <Magnetic>
+            <a
+              href={personalInfo.cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.7rem 1.6rem',
+                borderRadius: '12px',
+                background: 'var(--accent)',
+                color: '#fff',
+                fontWeight: 500,
+                fontSize: '0.88rem',
+                textDecoration: 'none',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                boxShadow: '0 4px 20px var(--glow)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = '0 8px 30px var(--glow)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = '0 4px 20px var(--glow)'
+              }}
+            >
+              Descargar CV
+            </a>
+          </Magnetic>
+          <Magnetic>
+            <a
+              href="#contact"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.7rem 1.6rem',
+                borderRadius: '12px',
+                background: 'var(--surface2)',
+                border: '1px solid var(--border)',
+                color: 'var(--text)',
+                fontWeight: 500,
+                fontSize: '0.88rem',
+                textDecoration: 'none',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--accent)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--border)'
+              }}
+            >
+              Contacto
+            </a>
+          </Magnetic>
         </motion.div>
 
         {/* Social icons */}

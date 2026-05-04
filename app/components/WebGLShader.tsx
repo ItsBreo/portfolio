@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useCallback } from 'react'
+import { useTheme } from 'next-themes'
 
 /* ─────────────────────────────────────────────────────────────────
  * WebGL Shader Background — fluid organic gradient animation.
@@ -19,6 +20,7 @@ const FRAGMENT_SHADER = `
   precision highp float;
   uniform float u_time;
   uniform vec2  u_resolution;
+  uniform float u_lightMode;
 
   /*  Simplex-like 2D noise  */
   vec3 mod289(vec3 x) { return x - floor(x * (1.0/289.0)) * 289.0; }
@@ -61,13 +63,23 @@ const FRAGMENT_SHADER = `
 
     float warp = n1 * 0.4 + n2 * 0.35 + n3 * 0.25;
 
-    /* Color palette — deep purples, blues, and accent violet
-       matching the portfolio's design system */
-    vec3 col1 = vec3(0.04, 0.03, 0.08);   /* deep void       */
-    vec3 col2 = vec3(0.10, 0.06, 0.20);   /* dark purple      */
-    vec3 col3 = vec3(0.25, 0.15, 0.55);   /* mid purple       */
-    vec3 col4 = vec3(0.29, 0.36, 0.75);   /* blue accent      */
-    vec3 col5 = vec3(0.45, 0.42, 0.90);   /* light purple     */
+    vec3 col1, col2, col3, col4, col5;
+    
+    if (u_lightMode > 0.5) {
+      /* LIGHT MODE PALETTE: Bright base with notable, vivid purple/blue waves */
+      col1 = vec3(0.93, 0.93, 0.96);   /* matches light bg */
+      col2 = vec3(0.85, 0.85, 0.95);   /* very light violet */
+      col3 = vec3(0.55, 0.40, 0.90);   /* NOTABLE VIVID PURPLE */
+      col4 = vec3(0.35, 0.55, 0.95);   /* VIVID BLUE */
+      col5 = vec3(0.80, 0.70, 0.98);   /* light violet highlight */
+    } else {
+      /* DARK MODE PALETTE: Deep void with neon accents */
+      col1 = vec3(0.04, 0.03, 0.08);   /* deep void       */
+      col2 = vec3(0.10, 0.06, 0.20);   /* dark purple      */
+      col3 = vec3(0.25, 0.15, 0.55);   /* mid purple       */
+      col4 = vec3(0.29, 0.36, 0.75);   /* blue accent      */
+      col5 = vec3(0.45, 0.42, 0.90);   /* light purple     */
+    }
 
     /* Mix colours with noise */
     float p = warp * 0.5 + 0.5;
@@ -81,8 +93,9 @@ const FRAGMENT_SHADER = `
     float vig = 1.0 - 0.35 * length(uv - 0.5);
     color *= vig;
 
-    /* Keep it subtle — low opacity so content remains readable */
-    gl_FragColor = vec4(color, 0.55);
+    /* Adjust opacity depending on mode to keep it clean */
+    float alpha = u_lightMode > 0.5 ? 0.45 : 0.55;
+    gl_FragColor = vec4(color, alpha);
   }
 `
 
@@ -95,6 +108,12 @@ export default function WebGLShader({ className = '', style }: WebGLShaderProps)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animRef = useRef<number>(0)
   const startTime = useRef<number>(Date.now())
+  const { resolvedTheme } = useTheme()
+  const isLightRef = useRef(resolvedTheme === 'light')
+
+  useEffect(() => {
+    isLightRef.current = resolvedTheme === 'light'
+  }, [resolvedTheme])
 
   const initGL = useCallback(() => {
     const canvas = canvasRef.current
@@ -144,6 +163,7 @@ export default function WebGLShader({ className = '', style }: WebGLShaderProps)
       program,
       timeLoc: gl.getUniformLocation(program, 'u_time'),
       resLoc: gl.getUniformLocation(program, 'u_resolution'),
+      lightLoc: gl.getUniformLocation(program, 'u_lightMode'),
     }
   }, [])
 
@@ -154,7 +174,7 @@ export default function WebGLShader({ className = '', style }: WebGLShaderProps)
     const ctx = initGL()
     if (!ctx) return
 
-    const { gl, timeLoc, resLoc } = ctx
+    const { gl, timeLoc, resLoc, lightLoc } = ctx
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio, 2)
@@ -166,15 +186,23 @@ export default function WebGLShader({ className = '', style }: WebGLShaderProps)
     resize()
     window.addEventListener('resize', resize)
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
     const render = () => {
+      // Si el usuario prefiere movimiento reducido, detenemos el loop de WebGL para ahorrar batería y respetar a11y.
+      if (prefersReducedMotion) return
+
       const elapsed = (Date.now() - startTime.current) / 1000
       gl.uniform1f(timeLoc, elapsed)
       gl.uniform2f(resLoc, canvas.width, canvas.height)
+      gl.uniform1f(lightLoc, isLightRef.current ? 1.0 : 0.0)
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
       animRef.current = requestAnimationFrame(render)
     }
 
-    render()
+    if (!prefersReducedMotion) {
+      render()
+    }
 
     return () => {
       cancelAnimationFrame(animRef.current)
@@ -185,7 +213,7 @@ export default function WebGLShader({ className = '', style }: WebGLShaderProps)
   return (
     <canvas
       ref={canvasRef}
-      className={className}
+      className={`webgl-bg ${className}`}
       style={{
         position: 'fixed',
         inset: 0,

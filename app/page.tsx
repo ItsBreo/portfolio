@@ -12,7 +12,7 @@ import BackToTop from './components/BackToTop'
 
 export default function Home() {
   return (
-    <main style={{ minHeight: '100vh', position: 'relative' }}>
+    <main id="main-content" style={{ minHeight: '100vh', position: 'relative' }}>
       {/* WebGL shader + grain overlay — fixed behind all content */}
       <BackgroundEffects />
 
