@@ -19,7 +19,7 @@ export const aboutText = {
 export const stack = [
   { name: 'Next.js',     category: 'Frontend', level: 75 },
   { name: 'TypeScript',  category: 'Lenguaje', level: 85 },
-  { name: 'Python',      category: 'Backend',  level: 60 },
+  { name: 'React.js',    category: 'Frontend',  level: 80 },
   { name: 'Tailwind',    category: 'Estilos',  level: 90 },
   { name: 'Docker',      category: 'DevOps',   level: 80 },
   { name: 'Kubernetes',  category: 'DevOps',   level: 70 },
