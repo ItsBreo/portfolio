@@ -81,7 +81,7 @@ export default function CustomCursor() {
     <>
       <style>{`
         @media (min-width: 768px) {
-          body, a, button { cursor: none !important; }
+          * { cursor: none !important; }
         }
       `}</style>
       {/* Main outer ring */}

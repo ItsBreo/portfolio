@@ -335,7 +335,6 @@ export default function Experience() {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '1rem',
-                    cursor: 'default',
                     transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
                   }}
                   onMouseEnter={(e) => {

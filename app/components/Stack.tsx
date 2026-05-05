@@ -77,7 +77,6 @@ export default function Stack() {
               style={{
                 padding: '1.25rem 1.5rem',
                 borderRadius: '16px',
-                cursor: 'default',
                 transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
               }}
               onMouseEnter={(e) => {
