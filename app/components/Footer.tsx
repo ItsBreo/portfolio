@@ -41,7 +41,6 @@ export default function Footer() {
             fontSize: '0.7rem',
             fontWeight: 300,
             color: 'var(--text3)',
-            opacity: 0.6,
           }}
         >
           Construido con Next.js & Framer Motion

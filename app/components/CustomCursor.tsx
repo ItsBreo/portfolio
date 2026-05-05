@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { useTheme } from 'next-themes'
 
 export default function CustomCursor() {
   const [mounted, setMounted] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
+  const { resolvedTheme } = useTheme()
   
   // Main cursor ring
   const cursorX = useMotionValue(-100)
@@ -72,6 +74,9 @@ export default function CustomCursor() {
     return null
   }
 
+  const isDark = resolvedTheme === 'dark'
+  const cursorColor = isDark ? 'var(--accent)' : '#3730A3'
+
   return (
     <>
       <style>{`
@@ -90,14 +95,14 @@ export default function CustomCursor() {
           width: '32px',
           height: '32px',
           borderRadius: '50%',
-          border: '2px solid var(--accent)',
+          border: `2px solid ${cursorColor}`,
           pointerEvents: 'none',
           zIndex: 9999,
-          mixBlendMode: 'difference', 
+          mixBlendMode: isDark ? 'difference' : 'normal',
         }}
         animate={{
           scale: isHovering ? 1.5 : 1,
-          backgroundColor: isHovering ? 'var(--accent)' : 'transparent',
+          backgroundColor: isHovering ? cursorColor : 'transparent',
           opacity: isHovering ? 0.8 : 1,
         }}
         transition={{ duration: 0.2 }}
@@ -113,10 +118,10 @@ export default function CustomCursor() {
           width: '4px',
           height: '4px',
           borderRadius: '50%',
-          backgroundColor: 'var(--accent)',
+          backgroundColor: cursorColor,
           pointerEvents: 'none',
           zIndex: 9999,
-          mixBlendMode: 'difference',
+          mixBlendMode: isDark ? 'difference' : 'normal',
         }}
         animate={{
           opacity: isHovering ? 0 : 1,

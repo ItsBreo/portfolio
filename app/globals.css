@@ -15,11 +15,11 @@ body {
   --bg2:        #f4f3fa;
   --surface:    rgba(255, 255, 255, 0.60);
   --surface2:   rgba(255, 255, 255, 0.30);
-  --border:     rgba(120, 100, 200, 0.15);
-  --border2:    rgba(120, 100, 200, 0.25);
+  --border:     rgba(80, 60, 160, 0.35);
+  --border2:    rgba(80, 60, 160, 0.50);
   --text:       #0a0a14;
-  --text2:      #5a5870;
-  --text3:      #9896b0;
+  --text2:      #3a3858;
+  --text3:      #5a5880;
   --accent:     #4b3bba; /* Darker, richer purple for contrast */
   --accent2:    #7b6fe3; /* Mid purple */
   --blue:       #2a6bb5; /* Deeper blue */
@@ -27,13 +27,13 @@ body {
 
   /* Glassmorphism */
   --glass-bg:     rgba(255, 255, 255, 0.72);
-  --glass-border: rgba(120, 100, 200, 0.12);
+  --glass-border: rgba(80, 60, 160, 0.20);
   --glass-blur:   20px;
   --glass-shadow: 0 4px 24px rgba(108, 92, 231, 0.05);
 
   /* Navbar */
   --nav-bg:     rgba(238, 237, 245, 0.72);
-  --nav-border: rgba(120, 100, 200, 0.08);
+  --nav-border: rgba(80, 60, 160, 0.15);
 
   /* Cards */
   --card-hover-shadow: 0 8px 40px rgba(108, 92, 231, 0.18), 0 0 20px rgba(108, 92, 231, 0.10);

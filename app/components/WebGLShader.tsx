@@ -66,12 +66,12 @@ const FRAGMENT_SHADER = `
     vec3 col1, col2, col3, col4, col5;
     
     if (u_lightMode > 0.5) {
-      /* LIGHT MODE PALETTE: Bright base with notable, vivid purple/blue waves */
-      col1 = vec3(0.93, 0.93, 0.96);   /* matches light bg */
-      col2 = vec3(0.85, 0.85, 0.95);   /* very light violet */
-      col3 = vec3(0.55, 0.40, 0.90);   /* NOTABLE VIVID PURPLE */
-      col4 = vec3(0.35, 0.55, 0.95);   /* VIVID BLUE */
-      col5 = vec3(0.80, 0.70, 0.98);   /* light violet highlight */
+      /* LIGHT MODE PALETTE: more saturated, higher contrast blobs */
+      col1 = vec3(0.91, 0.90, 0.97);   /* base — slightly more tinted */
+      col2 = vec3(0.76, 0.70, 0.97);   /* saturated lavender */
+      col3 = vec3(0.44, 0.26, 0.86);   /* deep vivid purple */
+      col4 = vec3(0.24, 0.44, 0.90);   /* deep vivid blue */
+      col5 = vec3(0.68, 0.56, 0.98);   /* saturated violet highlight */
     } else {
       /* DARK MODE PALETTE: Deep void with neon accents */
       col1 = vec3(0.04, 0.03, 0.08);   /* deep void       */
@@ -94,7 +94,7 @@ const FRAGMENT_SHADER = `
     color *= vig;
 
     /* Adjust opacity depending on mode to keep it clean */
-    float alpha = u_lightMode > 0.5 ? 0.45 : 0.55;
+    float alpha = u_lightMode > 0.5 ? 0.68 : 0.55;
     gl_FragColor = vec4(color, alpha);
   }
 `

@@ -1,7 +1,7 @@
 export const personalInfo = {
   name: 'Josue Castro',
   role: 'Fullstack Developer',
-  bio: 'Desarrollo aplicaciones web completas — desde la API hasta la interfaz. Me importa igual el rendimiento del backend que el último detalle del diseño.',
+  bio: 'Fullstack con foco en Laravel, React y TypeScript. Me importa tanto que el sistema escale como que la interfaz sea rápida y precisa.',
   email: 'castrorodriguezjosue@gmail.com',
   github: 'https://github.com/ItsBreo',
   linkedin: 'https://linkedin.com/in/tunombre',
