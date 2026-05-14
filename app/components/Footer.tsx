@@ -14,7 +14,10 @@ export default function Footer() {
       transition={{ duration: 0.6 }}
       style={{
         padding: '2rem 1.5rem',
-        borderTop: '1px solid var(--border)',
+        borderTop: '1px solid var(--border2)',
+        background: 'var(--surface)',
+        backdropFilter: 'blur(12px)',
+        WebkitBackdropFilter: 'blur(12px)',
         textAlign: 'center',
       }}
     >
@@ -28,9 +31,9 @@ export default function Footer() {
       >
         <span
           style={{
-            fontSize: '0.8rem',
-            fontWeight: 300,
-            color: 'var(--text3)',
+            fontSize: '0.85rem',
+            fontWeight: 500,
+            color: 'var(--text)',
             letterSpacing: '0.01em',
           }}
         >
@@ -38,12 +41,12 @@ export default function Footer() {
         </span>
         <span
           style={{
-            fontSize: '0.7rem',
-            fontWeight: 300,
-            color: 'var(--text3)',
+            fontSize: '0.78rem',
+            fontWeight: 400,
+            color: 'var(--text2)',
           }}
         >
-          Construido con Next.js & Framer Motion
+          Construido con Next.js & mucho café ☕
         </span>
       </div>
     </motion.footer>
