@@ -1,7 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
 
 // SVG Icons
@@ -20,42 +19,8 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, index, EASE_OUT_EXPO }: ProjectCardProps) {
-  const ref = useRef<HTMLDivElement>(null)
-
-  // Framer motion values for 3D tilt
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-
-  // Smooth springs for fluid movement
-  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 20 })
-  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 20 })
-
-  // Map mouse position to rotation angles (max 8 degrees tilt)
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['6deg', '-6deg'])
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-6deg', '6deg'])
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return
-    const rect = ref.current.getBoundingClientRect()
-    const width = rect.width
-    const height = rect.height
-    // Get mouse position relative to card center (normalized from -0.5 to 0.5)
-    const mouseX = e.clientX - rect.left
-    const mouseY = e.clientY - rect.top
-    const xPct = mouseX / width - 0.5
-    const yPct = mouseY / height - 0.5
-    x.set(xPct)
-    y.set(yPct)
-  }
-
-  const handleMouseLeave = () => {
-    x.set(0)
-    y.set(0)
-  }
-
   return (
     <motion.article
-      ref={ref}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -64,36 +29,20 @@ export default function ProjectCard({ project, index, EASE_OUT_EXPO }: ProjectCa
         delay: 0.2 + index * 0.1,
         ease: EASE_OUT_EXPO as any,
       }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       style={{
-        rotateX,
-        rotateY,
-        transformStyle: 'preserve-3d',
-        perspective: 1000,
         borderRadius: '20px',
-        cursor: 'default',
-        zIndex: 1,
       }}
-      whileHover={{ scale: 1.02, zIndex: 10 }}
     >
       <div
-        className="glass"
         style={{
           borderRadius: '20px',
           overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
           height: '100%',
+          background: 'var(--bg2)',
+          border: '1px solid var(--border)',
           boxShadow: 'var(--glass-shadow)',
-          transform: 'translateZ(20px)', // Lift content above background
-          transition: 'box-shadow 0.3s ease',
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.boxShadow = 'var(--card-hover-shadow)'
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.boxShadow = 'var(--glass-shadow)'
         }}
       >
         {/* Project Image */}
@@ -107,14 +56,14 @@ export default function ProjectCard({ project, index, EASE_OUT_EXPO }: ProjectCa
               borderBottom: '1px solid var(--border)',
             }}
           >
-            <motion.img
+            <img
               src={project.image}
               alt={project.title}
               style={{
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                transform: 'translateZ(30px)',
+                display: 'block',
               }}
             />
           </div>
@@ -218,7 +167,6 @@ export default function ProjectCard({ project, index, EASE_OUT_EXPO }: ProjectCa
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`GitHub - ${project.title}`}
-                data-magnetic="true"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -227,10 +175,7 @@ export default function ProjectCard({ project, index, EASE_OUT_EXPO }: ProjectCa
                   fontWeight: 400,
                   color: 'var(--text3)',
                   textDecoration: 'none',
-                  transition: 'color 0.3s',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text3)')}
               >
                 <GithubIcon size={15} />
                 Código
@@ -242,7 +187,6 @@ export default function ProjectCard({ project, index, EASE_OUT_EXPO }: ProjectCa
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Demo - ${project.title}`}
-                data-magnetic="true"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -251,10 +195,7 @@ export default function ProjectCard({ project, index, EASE_OUT_EXPO }: ProjectCa
                   fontWeight: 400,
                   color: 'var(--text3)',
                   textDecoration: 'none',
-                  transition: 'color 0.3s',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text3)')}
               >
                 <ExternalLink size={15} />
                 Demo

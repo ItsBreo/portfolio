@@ -45,18 +45,8 @@ export default function BackToTop() {
             justifyContent: 'center',
             cursor: 'pointer',
             color: 'var(--accent)',
-            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
           }}
-          whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.92 }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.boxShadow = 'var(--card-hover-shadow)'
-            e.currentTarget.style.borderColor = 'var(--accent)'
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.boxShadow = 'var(--glass-shadow)'
-            e.currentTarget.style.borderColor = 'var(--glass-border)'
-          }}
         >
           <ArrowUp size={18} />
         </motion.button>

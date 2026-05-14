@@ -97,18 +97,19 @@ export default function Experience() {
       >
         {/* Section label */}
         <motion.span
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
           style={{
-            display: 'inline-block',
+            display: 'block',
             fontSize: '0.75rem',
             fontWeight: 600,
             color: 'var(--accent)',
             textTransform: 'uppercase',
             letterSpacing: '0.12em',
             marginBottom: '0.5rem',
+            textAlign: 'center',
           }}
         >
           Trayectoria
@@ -125,6 +126,7 @@ export default function Experience() {
             color: 'var(--text)',
             letterSpacing: '-0.02em',
             marginBottom: '3rem',
+            textAlign: 'center',
           }}
         >
           Experiencia y formación
@@ -209,15 +211,6 @@ export default function Experience() {
                     style={{
                       padding: '1.25rem 1.5rem',
                       borderRadius: '16px',
-                      transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateX(4px)'
-                      e.currentTarget.style.boxShadow = 'var(--card-hover-shadow)'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateX(0)'
-                      e.currentTarget.style.boxShadow = 'var(--glass-shadow)'
                     }}
                   >
                     <span
@@ -335,15 +328,6 @@ export default function Experience() {
                     display: 'flex',
                     alignItems: 'center',
                     gap: '1rem',
-                    transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)'
-                    e.currentTarget.style.boxShadow = 'var(--card-hover-shadow)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)'
-                    e.currentTarget.style.boxShadow = 'var(--glass-shadow)'
                   }}
                 >
                   {/* Icon */}

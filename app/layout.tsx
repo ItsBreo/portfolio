@@ -26,7 +26,6 @@ export const metadata: Metadata = {
   },
 }
 
-import CustomCursor from './components/CustomCursor'
 
 export default function RootLayout({
   children,
@@ -40,7 +39,6 @@ export default function RootLayout({
           Saltar al contenido principal
         </a>
         <ThemeProvider>
-          <CustomCursor />
           {children}
         </ThemeProvider>
       </body>

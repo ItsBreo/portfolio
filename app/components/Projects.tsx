@@ -22,18 +22,19 @@ export default function Projects() {
       >
         {/* Section label */}
         <motion.span
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
           style={{
-            display: 'inline-block',
+            display: 'block',
             fontSize: '0.75rem',
             fontWeight: 600,
             color: 'var(--accent)',
             textTransform: 'uppercase',
             letterSpacing: '0.12em',
             marginBottom: '0.5rem',
+            textAlign: 'center',
           }}
         >
           Proyectos
@@ -50,6 +51,7 @@ export default function Projects() {
             color: 'var(--text)',
             letterSpacing: '-0.02em',
             marginBottom: '2.5rem',
+            textAlign: 'center',
           }}
         >
           Lo que he construido

@@ -4,7 +4,6 @@ import { motion } from 'framer-motion'
 import { ArrowDown, Mail } from 'lucide-react'
 import { personalInfo } from '@/lib/data'
 import { EASE_OUT_EXPO } from '@/lib/animations'
-import Magnetic from './Magnetic'
 import TextReveal from './TextReveal'
 
 /* Inline SVG brand icons (lucide-react removed brand icons) */
@@ -124,62 +123,44 @@ export default function Hero() {
             justifyContent: 'center',
           }}
         >
-          <Magnetic>
-            <a
-              href={personalInfo.cvUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                padding: '0.7rem 1.6rem',
-                borderRadius: '12px',
-                background: 'var(--accent)',
-                color: '#fff',
-                fontWeight: 500,
-                fontSize: '0.88rem',
-                textDecoration: 'none',
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                boxShadow: '0 4px 20px var(--glow)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 8px 30px var(--glow)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 4px 20px var(--glow)'
-              }}
-            >
-              Descargar CV
-            </a>
-          </Magnetic>
-          <Magnetic>
-            <a
-              href="#contact"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                padding: '0.7rem 1.6rem',
-                borderRadius: '12px',
-                background: 'var(--surface2)',
-                border: '1px solid var(--border)',
-                color: 'var(--text)',
-                fontWeight: 500,
-                fontSize: '0.88rem',
-                textDecoration: 'none',
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = 'var(--accent)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = 'var(--border)'
-              }}
-            >
-              Contacto
-            </a>
-          </Magnetic>
+          <a
+            href={personalInfo.cvUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              padding: '0.7rem 1.6rem',
+              borderRadius: '12px',
+              background: 'var(--accent)',
+              color: '#fff',
+              fontWeight: 500,
+              fontSize: '0.88rem',
+              textDecoration: 'none',
+              boxShadow: '0 4px 20px var(--glow)',
+            }}
+          >
+            Descargar CV
+          </a>
+          <a
+            href="#contact"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              padding: '0.7rem 1.6rem',
+              borderRadius: '12px',
+              background: 'var(--surface2)',
+              border: '1px solid var(--border)',
+              color: 'var(--text)',
+              fontWeight: 500,
+              fontSize: '0.88rem',
+              textDecoration: 'none',
+            }}
+          >
+            Contacto
+          </a>
         </motion.div>
 
         {/* Social icons */}
@@ -211,18 +192,7 @@ export default function Hero() {
                 justifyContent: 'center',
                 color: 'var(--text3)',
                 border: '1px solid var(--border)',
-                transition: 'all 0.3s',
                 textDecoration: 'none',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = 'var(--accent)'
-                e.currentTarget.style.borderColor = 'var(--accent)'
-                e.currentTarget.style.transform = 'translateY(-2px)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'var(--text3)'
-                e.currentTarget.style.borderColor = 'var(--border)'
-                e.currentTarget.style.transform = 'translateY(0)'
               }}
             >
               <Icon />

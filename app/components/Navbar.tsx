@@ -122,16 +122,9 @@ export default function Navbar() {
                     fontWeight: isActive ? 500 : 400,
                     color: isActive ? 'var(--accent)' : 'var(--text2)',
                     textDecoration: 'none',
-                    transition: 'color 0.3s',
                     letterSpacing: '0.01em',
                     position: 'relative',
                     paddingBottom: '4px',
-                  }}
-                  onMouseEnter={(e) => {
-                    if (!isActive) e.currentTarget.style.color = 'var(--accent)'
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isActive) e.currentTarget.style.color = 'var(--text2)'
                   }}
                 >
                   {link.label}
@@ -162,7 +155,6 @@ export default function Navbar() {
               <motion.button
                 onClick={toggleTheme}
                 whileTap={{ scale: 0.88 }}
-                whileHover={{ scale: 1.08 }}
                 aria-label="Toggle theme"
                 style={{
                   background: 'var(--surface2)',
@@ -175,7 +167,6 @@ export default function Navbar() {
                   justifyContent: 'center',
                   cursor: 'pointer',
                   color: 'var(--text2)',
-                  transition: 'all 0.3s',
                 }}
               >
                 <AnimatePresence mode="wait">
@@ -259,10 +250,7 @@ export default function Navbar() {
                   fontWeight: 500,
                   color: 'var(--text)',
                   textDecoration: 'none',
-                  transition: 'color 0.3s',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text)')}
               >
                 {link.label}
               </motion.a>

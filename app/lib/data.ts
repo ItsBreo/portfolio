@@ -17,15 +17,15 @@ export const aboutText = {
 }
 
 export const stack = [
-  { name: 'Next.js',     category: 'Frontend', level: 75 },
-  { name: 'TypeScript',  category: 'Lenguaje', level: 85 },
-  { name: 'React.js',    category: 'Frontend',  level: 80 },
-  { name: 'Tailwind',    category: 'Estilos',  level: 90 },
-  { name: 'Docker',      category: 'DevOps',   level: 80 },
-  { name: 'Kubernetes',  category: 'DevOps',   level: 70 },
-  { name: 'SQL / NoSQL', category: 'Datos',    level: 80 },
-  { name: 'Java',        category: 'Backend',  level: 65 },
-  { name: 'Laravel',     category: 'Backend',  level: 85 },
+  { name: 'Next.js',     category: 'Frontend', level: 55 },
+  { name: 'TypeScript',  category: 'Lenguaje', level: 35 },
+  { name: 'React.js',    category: 'Frontend', level: 70 },
+  { name: 'Tailwind',    category: 'Estilos',  level: 80 },
+  { name: 'Docker',      category: 'DevOps',   level: 60 },
+  { name: 'Kubernetes',  category: 'DevOps',   level: 60 },
+  { name: 'SQL / NoSQL', category: 'Datos',    level: 45 },
+  { name: 'Java',        category: 'Backend',  level: 55 },
+  { name: 'Laravel',     category: 'Backend',  level: 60 },
 ]
 
 export const projects = [
@@ -102,52 +102,45 @@ export const certifications = [
   },
   {
     id: 2,
-    title: 'CFGS Administración de Sistemas Informáticos y Redes',
-    issuer: 'CIFP Villa de Agüimes',
-    date: '2023 - 2025',
-    icon: 'graduation',
-  },
-  {
-    id: 3,
-    title: 'Docker y Kubernetes',
-    issuer: 'Udemy',
-    date: '2025',
-    icon: 'docker',
-  },
-  {
-    id: 4,
-    title: 'React — The Complete Guide',
-    issuer: 'Udemy',
-    date: '2025 - 2026',
-    icon: 'react',
-  },
-  {
-    id: 5,
-    title: 'Docker y Kubernetes',
-    issuer: 'Udemy',
-    date: '2025',
-    icon: 'docker',
-  },
-  {
-    id: 6,
-    title: 'Tutorial Angular desde 0',
-    issuer: 'Todo Code - YT',
-    date: '2026',
-    icon: 'angular',
-  },
-  {
-    id: 7,
     title: 'Formación Qlik Sense',
     issuer: 'Mercanza',
     date: '2026',
     icon: 'analytics',
   },
   {
-    id: 8,
+    id: 3,
+    title: 'React — The Complete Guide',
+    issuer: 'Udemy',
+    date: '2026',
+    icon: 'react',
+  },
+  {
+    id: 4,
+    title: 'Tutorial Angular desde 0',
+    issuer: 'Todo Code - YT',
+    date: '2026',
+    icon: 'angular',
+  },
+  {
+    id: 5,
+    title: 'CFGS Administración de Sistemas Informáticos y Redes',
+    issuer: 'CIFP Villa de Agüimes',
+    date: '2023 - 2025',
+    icon: 'graduation',
+  },
+  {
+    id: 6,
     title: 'Formación PHP y Laravel',
     issuer: 'Udemy',
     date: '2025',
     icon: 'laravel',
+  },
+  {
+    id: 7,
+    title: 'Docker y Kubernetes',
+    issuer: 'Udemy',
+    date: '2025',
+    icon: 'docker',
   },
 ]
 
