@@ -19,7 +19,6 @@ export default function Stack() {
         transition={{ duration: 0.8, ease: EASE_OUT_EXPO }}
         style={{ maxWidth: '1100px', margin: '0 auto' }}
       >
-        {/* Section label */}
         <motion.span
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,99 +55,62 @@ export default function Stack() {
           Tecnologías que uso
         </motion.h2>
 
-        {/* Skills grid */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
             gap: '1rem',
           }}
         >
-          {stack.map((skill, index) => (
+          {stack.map((group, index) => (
             <motion.div
-              key={skill.name}
+              key={group.category}
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{
                 duration: 0.6,
-                delay: 0.2 + index * 0.06,
+                delay: 0.2 + index * 0.08,
                 ease: EASE_OUT_EXPO,
               }}
               className="glass"
               style={{
-                padding: '1.25rem 1.5rem',
+                padding: '1.5rem',
                 borderRadius: '16px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1rem',
               }}
             >
-              {/* Skill header */}
-              <div
+              <span
                 style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  marginBottom: '0.75rem',
+                  fontSize: '0.7rem',
+                  fontWeight: 600,
+                  color: 'var(--accent)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.1em',
                 }}
               >
-                <div>
+                {group.category}
+              </span>
+
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                {group.items.map((item) => (
                   <span
+                    key={item}
                     style={{
-                      fontSize: '0.95rem',
+                      fontSize: '0.82rem',
                       fontWeight: 500,
                       color: 'var(--text)',
+                      background: 'var(--surface2)',
+                      border: '1px solid var(--border)',
+                      padding: '0.4rem 0.8rem',
+                      borderRadius: '8px',
                     }}
                   >
-                    {skill.name}
+                    {item}
                   </span>
-                  <span
-                    style={{
-                      display: 'block',
-                      fontSize: '0.7rem',
-                      fontWeight: 400,
-                      color: 'var(--text3)',
-                      marginTop: '0.15rem',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.08em',
-                    }}
-                  >
-                    {skill.category}
-                  </span>
-                </div>
-                <span
-                  style={{
-                    fontSize: '0.8rem',
-                    fontWeight: 600,
-                    color: 'var(--accent)',
-                  }}
-                >
-                  {skill.level}%
-                </span>
-              </div>
-
-              {/* Progress bar */}
-              <div
-                style={{
-                  height: '4px',
-                  borderRadius: '2px',
-                  background: 'var(--surface2)',
-                  overflow: 'hidden',
-                }}
-              >
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${skill.level}%` }}
-                  viewport={{ once: true }}
-                  transition={{
-                    duration: 1,
-                    delay: 0.4 + index * 0.08,
-                    ease: EASE_OUT_EXPO,
-                  }}
-                  style={{
-                    height: '100%',
-                    borderRadius: '2px',
-                    background: `linear-gradient(90deg, var(--accent), var(--blue))`,
-                  }}
-                />
+                ))}
               </div>
             </motion.div>
           ))}

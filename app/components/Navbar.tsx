@@ -155,7 +155,7 @@ export default function Navbar() {
               <motion.button
                 onClick={toggleTheme}
                 whileTap={{ scale: 0.88 }}
-                aria-label="Toggle theme"
+                aria-label="Cambiar tema"
                 style={{
                   background: 'var(--surface2)',
                   border: '1px solid var(--border)',
@@ -199,7 +199,7 @@ export default function Navbar() {
             <button
               className="nav-mobile-toggle"
               onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Menu"
+              aria-label="Menú"
               style={{
                 background: 'none',
                 border: 'none',

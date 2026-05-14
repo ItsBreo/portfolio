@@ -1,7 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ExternalLink } from 'lucide-react'
+import Image from 'next/image'
+import { ExternalLink, Users } from 'lucide-react'
 
 // SVG Icons
 function GithubIcon({ size = 15 }: { size?: number }) {
@@ -56,27 +57,27 @@ export default function ProjectCard({ project, index, EASE_OUT_EXPO }: ProjectCa
               borderBottom: '1px solid var(--border)',
             }}
           >
-            <img
+            <Image
               src={project.image}
               alt={project.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 340px"
+              quality={85}
+              loading={index === 0 ? 'eager' : 'lazy'}
+              priority={index === 0}
               style={{
-                width: '100%',
-                height: '100%',
                 objectFit: 'cover',
-                display: 'block',
               }}
             />
           </div>
         )}
 
-        {/* Top accent gradient bar if no image */}
+        {/* Top accent bar if no image */}
         {!project.image && (
           <div
             style={{
-              height: '3px',
-              background: 'linear-gradient(90deg, var(--accent), var(--blue), var(--accent2))',
-              backgroundSize: '200% 100%',
-              animation: 'gradientShift 4s ease infinite',
+              height: '2px',
+              background: 'var(--accent)',
             }}
           />
         )}
@@ -115,6 +116,26 @@ export default function ProjectCard({ project, index, EASE_OUT_EXPO }: ProjectCa
               >
                 {project.subtitle}
               </p>
+            )}
+            {project.team && project.team > 1 && (
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.3rem',
+                  marginTop: '0.5rem',
+                  fontSize: '0.7rem',
+                  fontWeight: 500,
+                  color: 'var(--text3)',
+                  background: 'var(--surface2)',
+                  border: '1px solid var(--border)',
+                  padding: '0.25rem 0.6rem',
+                  borderRadius: '100px',
+                }}
+              >
+                <Users size={12} />
+                Equipo de {project.team}
+              </div>
             )}
           </div>
 
@@ -166,7 +187,7 @@ export default function ProjectCard({ project, index, EASE_OUT_EXPO }: ProjectCa
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`GitHub - ${project.title}`}
+                aria-label={`Código de ${project.title} en GitHub`}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -186,7 +207,7 @@ export default function ProjectCard({ project, index, EASE_OUT_EXPO }: ProjectCa
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`Demo - ${project.title}`}
+                aria-label={`Demo de ${project.title}`}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',

@@ -13,11 +13,8 @@ export default function Footer() {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
       style={{
-        padding: '2rem 1.5rem',
-        borderTop: '1px solid var(--border2)',
-        background: 'var(--surface)',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
+        padding: '2.5rem 1.5rem',
+        borderTop: '1px solid var(--border)',
         textAlign: 'center',
       }}
     >
@@ -46,7 +43,7 @@ export default function Footer() {
             color: 'var(--text2)',
           }}
         >
-          Construido con Next.js & mucho café ☕
+          Hecho con Next.js y mucho café ☕
         </span>
       </div>
     </motion.footer>

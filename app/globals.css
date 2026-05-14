@@ -11,70 +11,69 @@ body {
 
 /* ─── Design Tokens — Light (default) ─── */
 :root {
-  --bg:         #eeedf5;
-  --bg2:        #f4f3fa;
-  --surface:    rgba(255, 255, 255, 0.60);
-  --surface2:   rgba(255, 255, 255, 0.30);
-  --border:     rgba(80, 60, 160, 0.35);
-  --border2:    rgba(80, 60, 160, 0.50);
-  --text:       #0a0a14;
-  --text2:      #3a3858;
-  --text3:      #5a5880;
-  --accent:     #4b3bba; /* Darker, richer purple for contrast */
-  --accent2:    #7b6fe3; /* Mid purple */
-  --blue:       #2a6bb5; /* Deeper blue */
-  --glow:       rgba(108, 92, 231, 0.10);
+  --bg:         #f6f8fc;
+  --bg2:        #ffffff;
+  --surface:    rgba(255, 255, 255, 0.85);
+  --surface2:   rgba(15, 23, 42, 0.04);
+  --border:     rgba(15, 23, 42, 0.10);
+  --border2:    rgba(15, 23, 42, 0.18);
+  --text:       #0f172a;
+  --text2:      #334155;
+  --text3:      #64748b;
+  --accent:     #2563eb; /* Blue 600 — brand */
+  --accent2:    #1d4ed8; /* Blue 700 — deeper */
+  --blue:       #2563eb;
+  --glow:       rgba(37, 99, 235, 0.08);
 
-  /* Glassmorphism */
-  --glass-bg:     rgba(255, 255, 255, 0.72);
-  --glass-border: rgba(80, 60, 160, 0.20);
-  --glass-blur:   20px;
-  --glass-shadow: 0 4px 24px rgba(108, 92, 231, 0.05);
+  /* Glassmorphism — higher opacity for legibility on flat bg */
+  --glass-bg:     rgba(255, 255, 255, 0.78);
+  --glass-border: rgba(15, 23, 42, 0.08);
+  --glass-blur:   14px;
+  --glass-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 16px rgba(15, 23, 42, 0.05);
 
   /* Navbar */
-  --nav-bg:     rgba(238, 237, 245, 0.72);
-  --nav-border: rgba(80, 60, 160, 0.15);
+  --nav-bg:     rgba(246, 248, 252, 0.80);
+  --nav-border: rgba(15, 23, 42, 0.08);
 
   /* Cards */
-  --card-hover-shadow: 0 8px 40px rgba(108, 92, 231, 0.18), 0 0 20px rgba(108, 92, 231, 0.10);
+  --card-hover-shadow: 0 4px 20px rgba(37, 99, 235, 0.10);
 }
 
 /* ─── Design Tokens — Dark ─── */
 .dark {
-  --bg:         #06060c;
-  --bg2:        #0c0c16;
-  --surface:    rgba(16, 16, 28, 0.70);
-  --surface2:   rgba(255, 255, 255, 0.04);
-  --border:     rgba(162, 155, 254, 0.12);
-  --border2:    rgba(162, 155, 254, 0.22);
-  --text:       #f0f0f8;
-  --text2:      #9896b0;
-  --text3:      #5a5870;
-  --accent:     #a29bfe;
-  --accent2:    #6c5ce7;
-  --blue:       #74b9ff;
-  --glow:       rgba(162, 155, 254, 0.08);
+  --bg:         #07101e;
+  --bg2:        #0c1628;
+  --surface:    rgba(15, 23, 42, 0.65);
+  --surface2:   rgba(255, 255, 255, 0.03);
+  --border:     rgba(148, 163, 184, 0.12);
+  --border2:    rgba(148, 163, 184, 0.22);
+  --text:       #f1f5f9;
+  --text2:      #cbd5e1;
+  --text3:      #94a3b8;
+  --accent:     #60a5fa; /* Blue 400 — brighter for dark bg */
+  --accent2:    #3b82f6; /* Blue 500 */
+  --blue:       #60a5fa;
+  --glow:       rgba(96, 165, 250, 0.10);
 
   /* Glassmorphism */
-  --glass-bg:     rgba(22, 22, 38, 0.65);
-  --glass-border: rgba(162, 155, 254, 0.10);
-  --glass-blur:   20px;
-  --glass-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  --glass-bg:     rgba(15, 23, 42, 0.65);
+  --glass-border: rgba(148, 163, 184, 0.10);
+  --glass-blur:   14px;
+  --glass-shadow: 0 1px 2px rgba(0, 0, 0, 0.18), 0 4px 16px rgba(0, 0, 0, 0.20);
 
   /* Navbar */
-  --nav-bg:     rgba(6, 6, 12, 0.72);
-  --nav-border: rgba(162, 155, 254, 0.06);
+  --nav-bg:     rgba(7, 16, 30, 0.78);
+  --nav-border: rgba(148, 163, 184, 0.10);
 
   /* Cards */
-  --card-hover-shadow: 0 8px 40px rgba(162, 155, 254, 0.14), 0 0 20px rgba(162, 155, 254, 0.08);
+  --card-hover-shadow: 0 4px 20px rgba(96, 165, 250, 0.14);
 }
 
 /* ─── Global Styles ─── */
 body {
   background: var(--bg);
   color: var(--text);
-  transition: background 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-              color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
 /* ─── Selection ─── */
@@ -107,76 +106,12 @@ body {
   box-shadow: var(--glass-shadow);
 }
 
-/* ─── Keyframe Animations ─── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(28px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.92); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-@keyframes slideRight {
-  from { opacity: 0; transform: translateX(-28px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes slideLeft {
-  from { opacity: 0; transform: translateX(28px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%      { opacity: 0.5; transform: scale(0.8); }
-}
-
-@keyframes scrollLine {
-  0%, 100% { opacity: 0.3; }
-  50%      { opacity: 1; }
-}
-
-@keyframes shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50%      { transform: translateY(-8px); }
-}
-
-@keyframes gradientShift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* ─── Animation Utilities ─── */
-.anim {
-  animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-.anim-d1 { animation-delay: 0.05s; }
-.anim-d2 { animation-delay: 0.15s; }
-.anim-d3 { animation-delay: 0.25s; }
-.anim-d4 { animation-delay: 0.38s; }
-.anim-d5 { animation-delay: 0.50s; }
-
-/* ─── Gradient Text Utility ─── */
+/* ─── Gradient Text Utility (static — no animation) ─── */
 .gradient-text {
-  background: linear-gradient(135deg, var(--accent), var(--blue), var(--accent2));
-  background-size: 200% 200%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gradientShift 6s ease infinite;
 }
 
 /* ─── Section spacing ─── */
@@ -189,7 +124,6 @@ body {
  * Accesibilidad (a11y) & UX
  * ───────────────────────────────────────────────────────────────── */
 
-/* 1. Estados de foco para navegación con teclado */
 *:focus:not(:focus-visible) {
   outline: none;
 }
@@ -201,12 +135,11 @@ body {
   transition: outline-offset 0.2s ease;
 }
 
-/* 2. Saltar al contenido principal (Screen readers / Keyboard) */
 .skip-to-content {
-  position: fixed; /* Mejor que absolute para que esté arriba del todo */
+  position: fixed;
   top: 0;
   left: 50%;
-  transform: translate(-50%, -150%); /* Oculto arriba de la pantalla */
+  transform: translate(-50%, -150%);
   background-color: var(--accent);
   color: #ffffff;
   padding: 1rem 1.5rem;
@@ -215,22 +148,21 @@ body {
   text-decoration: none;
   font-weight: 600;
   transition: transform 0.3s ease;
-  pointer-events: none; /* No clickeable mientras está oculto */
+  pointer-events: none;
 }
 
 .skip-to-content:focus-visible {
-  transform: translate(-50%, 0); /* Baja a la vista */
+  transform: translate(-50%, 0);
   pointer-events: auto;
   outline: 3px solid #fff;
   box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 
-/* 3. Reducir Movimiento (Preferencia del SO) */
+/* Reducir movimiento (preferencia del SO) */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto !important;
   }
-  
   *,
   *::before,
   *::after {

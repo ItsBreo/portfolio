@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowDown, Mail } from 'lucide-react'
 import { personalInfo } from '@/lib/data'
 import { EASE_OUT_EXPO } from '@/lib/animations'
@@ -40,6 +41,21 @@ const item = {
 }
 
 export default function Hero() {
+  const [readyToShow, setReadyToShow] = useState(false)
+  const [atTop, setAtTop] = useState(true)
+
+  useEffect(() => {
+    const t = setTimeout(() => setReadyToShow(true), 1500)
+    const onScroll = () => setAtTop(window.scrollY < 80)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      clearTimeout(t)
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, [])
+
+  const showScrollIndicator = readyToShow && atTop
+
   return (
     <section
       id="hero"
@@ -202,26 +218,32 @@ export default function Hero() {
       </motion.div>
 
       {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
-        style={{
-          position: 'absolute',
-          bottom: '2rem',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.4rem',
-        }}
-      >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <ArrowDown size={16} style={{ color: 'var(--text3)' }} />
-        </motion.div>
-      </motion.div>
+      <AnimatePresence>
+        {showScrollIndicator && (
+          <motion.div
+            key="scroll-indicator"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 12 }}
+            transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
+            style={{
+              position: 'absolute',
+              bottom: '2rem',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '0.4rem',
+            }}
+          >
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <ArrowDown size={16} style={{ color: 'var(--text3)' }} />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }
