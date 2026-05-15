@@ -46,6 +46,7 @@ export default function BackToTop() {
             cursor: 'pointer',
             color: 'var(--accent)',
           }}
+          whileHover={{ y: -3, scale: 1.05, boxShadow: '0 8px 24px var(--glow)' }}
           whileTap={{ scale: 0.92 }}
         >
           <ArrowUp size={18} />

@@ -88,19 +88,22 @@ export default function Navbar() {
           }}
         >
           {/* Logo */}
-          <a
+          <motion.a
             href="#hero"
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 18 }}
             style={{
               fontSize: '1.1rem',
               fontWeight: 600,
               color: 'var(--text)',
               textDecoration: 'none',
               letterSpacing: '-0.02em',
-              transition: 'color 0.3s',
+              display: 'inline-block',
             }}
           >
             JC<span style={{ color: 'var(--accent)' }}>.</span>
-          </a>
+          </motion.a>
 
           {/* Desktop Links */}
           <div
@@ -114,9 +117,11 @@ export default function Navbar() {
             {navLinks.map((link) => {
               const isActive = activeSection === link.href
               return (
-                <a
+                <motion.a
                   key={link.href}
                   href={link.href}
+                  whileHover={{ y: -2, color: 'var(--accent)' }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 18 }}
                   style={{
                     fontSize: '0.85rem',
                     fontWeight: isActive ? 500 : 400,
@@ -143,7 +148,7 @@ export default function Navbar() {
                       }}
                     />
                   )}
-                </a>
+                </motion.a>
               )
             })}
           </div>
@@ -154,7 +159,9 @@ export default function Navbar() {
             {mounted && (
               <motion.button
                 onClick={toggleTheme}
+                whileHover={{ scale: 1.1, rotate: 15, borderColor: 'var(--accent)', color: 'var(--accent)', boxShadow: '0 6px 20px var(--glow)' }}
                 whileTap={{ scale: 0.88 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 18 }}
                 aria-label="Cambiar tema"
                 style={{
                   background: 'var(--surface2)',

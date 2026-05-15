@@ -25,6 +25,7 @@ export default function ProjectCard({ project, index, EASE_OUT_EXPO }: ProjectCa
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
+      whileHover={{ y: -6, boxShadow: '0 12px 40px var(--glow)' }}
       transition={{
         duration: 0.7,
         delay: 0.2 + index * 0.1,
@@ -183,11 +184,14 @@ export default function ProjectCard({ project, index, EASE_OUT_EXPO }: ProjectCa
             }}
           >
             {project.github && (
-              <a
+              <motion.a
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Código de ${project.title} en GitHub`}
+                whileHover={{ x: 3, color: 'var(--accent)' }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -200,14 +204,17 @@ export default function ProjectCard({ project, index, EASE_OUT_EXPO }: ProjectCa
               >
                 <GithubIcon size={15} />
                 Código
-              </a>
+              </motion.a>
             )}
             {project.demo && (
-              <a
+              <motion.a
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Demo de ${project.title}`}
+                whileHover={{ x: 3, color: 'var(--accent)' }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -220,7 +227,7 @@ export default function ProjectCard({ project, index, EASE_OUT_EXPO }: ProjectCa
               >
                 <ExternalLink size={15} />
                 Demo
-              </a>
+              </motion.a>
             )}
           </div>
         </div>

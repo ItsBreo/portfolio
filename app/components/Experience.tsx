@@ -309,89 +309,111 @@ export default function Experience() {
               Certificaciones
             </motion.h3>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <div style={{ position: 'relative', paddingLeft: '1.5rem' }}>
+              {/* Vertical line */}
+              <div
+                style={{
+                  position: 'absolute',
+                  left: '4px',
+                  top: '8px',
+                  bottom: '8px',
+                  width: '2px',
+                  background: 'linear-gradient(180deg, var(--accent), var(--blue), transparent)',
+                  borderRadius: '2px',
+                }}
+              />
+
               {certifications.map((cert, index) => (
                 <motion.div
                   key={cert.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{
                     duration: 0.6,
                     delay: 0.25 + index * 0.08,
                     ease: EASE_OUT_EXPO,
                   }}
-                  className="glass"
                   style={{
-                    padding: '1rem 1.25rem',
-                    borderRadius: '14px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '1rem',
+                    position: 'relative',
+                    marginBottom: index < certifications.length - 1 ? '1.25rem' : 0,
                   }}
                 >
-                  {/* Icon */}
+                  {/* Dot on the timeline */}
                   <div
                     style={{
-                      width: '44px',
-                      height: '44px',
-                      borderRadius: '12px',
-                      background: 'var(--glow)',
+                      position: 'absolute',
+                      left: '-1.5rem',
+                      top: '6px',
+                      width: '10px',
+                      height: '10px',
+                      borderRadius: '50%',
+                      background: index === 0 ? 'var(--accent)' : 'var(--border2)',
+                      border: '2px solid var(--bg)',
+                      boxShadow: index === 0 ? '0 0 8px var(--glow)' : 'none',
+                    }}
+                  />
+
+                  <div
+                    className="glass"
+                    style={{
+                      padding: '1rem 1.25rem',
+                      borderRadius: '14px',
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0,
+                      gap: '1rem',
                     }}
                   >
-                    <CertIcon name={cert.icon} />
-                  </div>
-
-                  {/* Info */}
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <h4
-                      style={{
-                        fontSize: '0.88rem',
-                        fontWeight: 600,
-                        color: 'var(--text)',
-                        lineHeight: 1.3,
-                      }}
-                    >
-                      {cert.title}
-                    </h4>
+                    {/* Icon */}
                     <div
                       style={{
+                        width: '44px',
+                        height: '44px',
+                        borderRadius: '12px',
+                        background: 'var(--glow)',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '0.5rem',
-                        marginTop: '0.2rem',
+                        justifyContent: 'center',
+                        flexShrink: 0,
                       }}
                     >
-                      <span
-                        style={{
-                          fontSize: '0.75rem',
-                          fontWeight: 400,
-                          color: 'var(--text3)',
-                        }}
-                      >
-                        {cert.issuer}
-                      </span>
-                      <span
-                        style={{
-                          width: '3px',
-                          height: '3px',
-                          borderRadius: '50%',
-                          background: 'var(--border2)',
-                          flexShrink: 0,
-                        }}
-                      />
+                      <CertIcon name={cert.icon} />
+                    </div>
+
+                    {/* Info */}
+                    <div style={{ flex: 1, minWidth: 0 }}>
                       <span
                         style={{
                           fontSize: '0.7rem',
                           fontWeight: 500,
                           color: 'var(--accent)',
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.06em',
                         }}
                       >
                         {cert.date}
+                      </span>
+                      <h4
+                        style={{
+                          fontSize: '0.88rem',
+                          fontWeight: 600,
+                          color: 'var(--text)',
+                          lineHeight: 1.3,
+                          marginTop: '0.15rem',
+                        }}
+                      >
+                        {cert.title}
+                      </h4>
+                      <span
+                        style={{
+                          display: 'block',
+                          fontSize: '0.75rem',
+                          fontWeight: 400,
+                          color: 'var(--text3)',
+                          marginTop: '0.1rem',
+                        }}
+                      >
+                        {cert.issuer}
                       </span>
                     </div>
                   </div>

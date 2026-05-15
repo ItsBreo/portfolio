@@ -43,7 +43,7 @@ export default function Footer() {
             color: 'var(--text2)',
           }}
         >
-          Hecho con Next.js y mucho café ☕
+          Josue Castro Rodríguez - Todos los derechos reservados.
         </span>
       </div>
     </motion.footer>

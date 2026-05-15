@@ -150,6 +150,8 @@ export default function Contact() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
+                whileHover={{ y: -4, boxShadow: '0 8px 24px var(--glow)' }}
+                whileTap={{ scale: 0.98 }}
                 transition={{
                   duration: 0.6,
                   delay: 0.25 + index * 0.08,
@@ -217,10 +219,13 @@ export default function Contact() {
           transition={{ duration: 0.6, delay: 0.5 }}
           style={{ display: 'inline-block' }}
         >
-          <a
+          <motion.a
             href={personalInfo.cvUrl}
             target="_blank"
             rel="noopener noreferrer"
+            whileHover={{ y: -3, boxShadow: '0 10px 30px var(--glow)' }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -237,7 +242,7 @@ export default function Contact() {
           >
             <FileDown size={16} />
             Descargar CV
-          </a>
+          </motion.a>
         </motion.div>
       </motion.div>
     </section>

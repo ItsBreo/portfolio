@@ -139,10 +139,13 @@ export default function Hero() {
             justifyContent: 'center',
           }}
         >
-          <a
+          <motion.a
             href={personalInfo.cvUrl}
             target="_blank"
             rel="noopener noreferrer"
+            whileHover={{ y: -3, boxShadow: '0 10px 30px var(--glow)' }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -158,9 +161,12 @@ export default function Hero() {
             }}
           >
             Descargar CV
-          </a>
-          <a
+          </motion.a>
+          <motion.a
             href="#contact"
+            whileHover={{ y: -3, borderColor: 'var(--accent)', boxShadow: '0 8px 24px var(--glow)' }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -176,7 +182,7 @@ export default function Hero() {
             }}
           >
             Contacto
-          </a>
+          </motion.a>
         </motion.div>
 
         {/* Social icons */}
@@ -193,12 +199,15 @@ export default function Hero() {
             { icon: LinkedinIcon, href: personalInfo.linkedin, label: 'LinkedIn' },
             { icon: () => <Mail size={18} />, href: `mailto:${personalInfo.email}`, label: 'Email' },
           ].map(({ icon: Icon, href, label }) => (
-            <a
+            <motion.a
               key={label}
               href={href}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
+              whileHover={{ y: -4, color: 'var(--accent)', borderColor: 'var(--accent)', boxShadow: '0 6px 20px var(--glow)' }}
+              whileTap={{ scale: 0.92 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 18 }}
               style={{
                 width: '40px',
                 height: '40px',
@@ -212,7 +221,7 @@ export default function Hero() {
               }}
             >
               <Icon />
-            </a>
+            </motion.a>
           ))}
         </motion.div>
       </motion.div>
